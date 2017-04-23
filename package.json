@@ -5,6 +5,7 @@
   "dependencies": {
     "d3": "^4.8.0",
     "golden-colors": "^2.0.0",
+    "js-object-pretty-print": "^0.3.0",
     "mathjs": "^3.12.0",
     "ramda": "^0.23.0",
     "react": "^15.5.4",
