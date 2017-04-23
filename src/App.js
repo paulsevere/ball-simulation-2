@@ -1,21 +1,39 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Circles from './components/circles';
+import * as d3 from 'd3';
+window.d3 = d3;
 class App extends Component {
   render() {
+    const {nodes, dispatch} = this.props;
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div onClick={e => dispatch({type: 'PAUSE'})} className="App">
+        <Circles circles={nodes} />
       </div>
     );
   }
+  componentDidMount() {
+    return requestAnimationFrame(t => {
+      console.log(t);
+      this.props.dispatch({type: 'TICK', t});
+    });
+  }
+  componentWillUpdate({pause}) {
+    if (pause) {
+      return;
+    }
+    return requestAnimationFrame(t => {
+      console.log(t);
+      this.props.dispatch({type: 'TICK', t});
+    });
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {dispatch};
+};
+
+const mapStateToProps = (state, ownProps = {}) => {
+  return {...state, ...ownProps};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
