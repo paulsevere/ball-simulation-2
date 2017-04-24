@@ -1,8 +1,13 @@
 import { randomUniform } from "d3";
-import { createNodes, defaultTick } from "../force-simulation";
+import { defaultTick } from "../force-simulation";
+import { createNodes } from "../force-simulation/createNodes";
 
 export default function(
-  state = createNodes(10, [{ r: 50, y: 0, x: 0 }], { r: 20, y: 200 }),
+  state = createNodes(null, [{ r: 50, y: 100, x: 100, dx: 5, dy: -5 }], {
+    r: randomUniform(20, 30),
+    y: randomUniform(-100, 100),
+    x: randomUniform(-100, 100)
+  }),
   action
 ) {
   switch (action.type) {
