@@ -11,7 +11,7 @@ export default props => {
         {pretty({ x, y, r, color, dx, dy }, null, "PRINT")
           .slice(1, -2)
           .split(",")
-          .filter(e => e.indexOf("color") == -1)
+          .filter(e => e.indexOf("color") === -1)
           .map((e, i) => (
             <tspan x={x} y={-(y + 20 - i * 13)} key={i}>{e.trim()}</tspan>
           ))}
